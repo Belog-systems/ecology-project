@@ -4,9 +4,9 @@
 
 ## Portal Air
 
-[Portal Air](portal-air/README.md) - действующий проект приёма, хранения и отображения данных физической станции с raw-first подходом, provenance, честным учётом gaps и отдельным private WEATHER shadow-контуром.
+[Portal Air V1 frozen sanitized baseline](portal-air/README.md) — curated reference tree, not a production deployment package. It retains a sanitized PM-source reader and documentation of privacy, security, time and missing-data boundaries.
 
-Текущий публичный статус Portal Air: [portal-air/docs/07_STATUS.md](portal-air/docs/07_STATUS.md).
+Scope, limitations and safe local checks: [portal-air/docs/INDEX.md](portal-air/docs/INDEX.md).
 
 ## Будущее устройство мониторинга
 

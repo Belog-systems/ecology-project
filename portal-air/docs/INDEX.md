@@ -1,0 +1,25 @@
+# Documentation index
+
+| Document | Purpose |
+|---|---|
+| [CURRENT_STATE.md](CURRENT_STATE.md) | Freeze and baseline status |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | Sanitized PM source-reader boundary |
+| [DATA_AND_TIME_SEMANTICS.md](DATA_AND_TIME_SEMANTICS.md) | PM receipt-time and future WEATHER boundary |
+| [PRIVACY_AND_LOCATION.md](PRIVACY_AND_LOCATION.md) | Coordinate and data exclusion boundary |
+| [OPERATIONS.md](OPERATIONS.md) | Non-production operating assumptions |
+| [DEPLOYMENT.md](DEPLOYMENT.md) | Explicit deployment non-instructions |
+| [CHANGE_REVERSAL_AND_RECOVERY_BOUNDARY.md](CHANGE_REVERSAL_AND_RECOVERY_BOUNDARY.md) | Boundary, not an executable procedure |
+| [BACKUP_AND_RESTORE.md](BACKUP_AND_RESTORE.md) | Future-only validation requirement |
+| [TESTING.md](TESTING.md) | Reproducible safe local checks |
+| [PUBLICATION_AUDIT.md](PUBLICATION_AUDIT.md) | Sanitization/audit procedure |
+| [LIMITATIONS.md](LIMITATIONS.md) | What this baseline cannot prove or do |
+| [FAQ.md](FAQ.md) | Concise scope answers |
+| [TROUBLESHOOTING.md](TROUBLESHOOTING.md) | Safe local diagnostics only |
+| [INCIDENT_LESSONS.md](INCIDENT_LESSONS.md) | Generalized engineering lessons |
+| [ROADMAP.md](ROADMAP.md) | Deferred workstreams |
+| [FUTURE_BOUNDARIES.md](FUTURE_BOUNDARIES.md) | Future-only architecture boundaries |
+| [WORKTREE_RECOVERY.md](WORKTREE_RECOVERY.md) | Safe local repository recovery guidance |
+| [review/CANDIDATE_MANIFEST.md](review/CANDIDATE_MANIFEST.md) | Generated candidate contents and hashes |
+
+Nothing in this documentation authorizes production access, a deployment,
+configuration change, provider polling, or station/firmware action.

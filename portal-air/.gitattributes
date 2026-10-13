@@ -1,0 +1,2 @@
+# Keep the curated baseline byte-stable across Windows and Unix working trees.
+* text=auto eol=lf
