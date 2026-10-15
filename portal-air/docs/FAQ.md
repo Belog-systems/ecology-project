@@ -478,7 +478,9 @@ how credential exposure is classified even when a value was not committed.
 
 **Context.** Historic recovery work distinguished creation of a backup artifact,
 an isolated import, logical comparison, off-host custody, and bare-environment
-recovery.
+recovery. At an earlier checkpoint, a fresh-dump database restore was recorded
+as `FAILED`: the available isolated targets did not establish a logical import.
+Later evidence established a separate isolated import and bounded comparison.
 
 **Symptoms.** A dump can have a plausible size and digest yet fail to import,
 restore only part of the expected data, depend on unavailable tooling, or be
@@ -494,9 +496,10 @@ over production, accepting a provider statement without evidence, or equating a
 same-host operational snapshot with full disaster recovery were rejected.
 
 **Established cause.** Backup generation and recovery are separate capabilities.
-An earlier incomplete restore result was later superseded by an evidence-backed
-isolated restore verification; that closure did not prove every off-host,
-independent-machine, or full reprovisioning scenario.
+The earlier `FAILED` result remains part of the historical record. It was
+superseded only for the later isolated database-import and comparison scope; it
+did not prove off-host custody, independent-machine recovery, protected-secret
+recovery, or full reprovisioning.
 
 **Solution.** Keep a bounded, isolated restore rehearsal in the acceptance path
 and state its exact scope. Protect recovery material and avoid destructive
@@ -512,9 +515,9 @@ recovery artifact. It makes no disaster-recovery readiness claim.
 handling, recovery objectives, and a recurring isolated restore/round-trip
 exercise before declaring DR readiness.
 
-**History.** The historic status changed as stronger restore evidence arrived;
-the retained lesson is to preserve both the earlier limitation and the precise
-scope of its later supersession.
+**History.** The historic status changed as stronger restore evidence arrived.
+The retained lesson is to preserve both the earlier `FAILED` outcome and the
+precise, narrower scope of its later supersession.
 
 ## 12. How should this material be reused or published safely?
 
@@ -565,3 +568,222 @@ production decisions under its own review process.
 **History.** The first public narrative contained broader lessons that were
 removed during sanitization. This successor restores their subject matter while
 preserving the later privacy boundary.
+
+## 13. Why is a browser demonstration not proof that a full Core is
+browser-ready?
+
+**Question.** If a browser can load one module through a test adapter, does that
+prove that the complete Foundation/Core architecture is ready to run in a
+browser?
+
+**Context.** A dated feasibility review separated a copied browser-facing
+reference module from a fuller Core that also depended on Node-bound filesystem,
+path, URL, and configuration work.
+
+**Symptoms.** A small module can load with copied reference data and a synthetic
+context while the full import graph cannot load, provision itself, or complete a
+lifecycle in a browser. Separately passing Node-side tests can obscure that
+boundary.
+
+**Diagnostics.** Identify the exact module, import graph, data adapter,
+configuration path, and lifecycle that were exercised. Test browser execution
+and Node execution as different environments. Check declared schemas and the
+runtime validator independently before treating them as one contract.
+
+**Failed options.** Calling a synthetic adapter spike a full Core integration,
+equating a Node suite with browser readiness, or treating one imported reference
+module as proof of browser-safe provisioning were rejected.
+
+**Established cause.** Browser feasibility has a scope. A copied module can be
+browser-feasible while a full Node-oriented Core remains not browser-ready.
+Neither result should be promoted beyond the exact topology exercised.
+
+**Solution.** Design a deliberate boundary between Node-side provisioning and
+browser execution. Define browser-safe descriptors, configuration, assets, and
+host authority before attempting a full lifecycle.
+
+**Verification.** Full browser readiness requires evidence from the actual Core
+topology in an ordinary browser. Module, fixture, and synthetic-adapter results
+remain useful but narrower evidence classes.
+
+**Current status.** This public reference includes neither a Foundation runtime
+nor a browser application. It makes no claim about current browser compatibility
+of an external system.
+
+**History.** The feasibility case remained `PARTIAL` / `BLOCKED`, rather than
+being promoted from a limited browser success to a full-Core pass.
+
+## 14. Why must a nullable public field be present as `null` rather than absent?
+
+**Question.** Is a missing field equivalent to a field whose known value is
+explicitly `null`?
+
+**Context.** A local contract guard initially treated an absent observation-time
+key like an explicitly present `null` value. Related reviews also showed why a
+declared schema and a runtime validator need their own evidence.
+
+**Symptoms.** A positive fixture can pass even when a required public field was
+omitted, typed incorrectly, or replaced with an unexpected container. Consumers
+then receive an ambiguous contract while a self-check appears green.
+
+**Diagnostics.** Test key presence, allowed nullability, exact scalar/container
+type, and permitted field set separately. Include negative fixtures for an
+absent key, explicit `null`, unexpected nested object, and unknown field where
+the public contract forbids it.
+
+**Failed options.** Using a lookup whose fallback value makes absent and `null`
+indistinguishable, checking only the happy-path fixture, or assuming that a
+schema declaration automatically proves runtime validation were rejected.
+
+**Established cause.** Nullable means that a present value may be `null`; it
+does not make the field optional. Schema review, parser behavior, serialization,
+and consumer validation each need an explicit boundary.
+
+**Solution.** Use an exact public allowlist and fail closed on absent required
+keys, invalid types, or forbidden structure. Preserve `null` where the source
+does not provide a real observation time instead of inventing one.
+
+**Verification.** A corrected local fixture guard can protect its selected
+source path. PHP endpoint, browser, deployment, and production evidence remain
+separate acceptance scopes.
+
+**Current status.** The reference reader documents a receipt-oriented contract;
+it exposes no public endpoint from this tree.
+
+**History.** The narrow diagnostic defect was corrected and independently
+reviewed locally without turning that outcome into a runtime-health claim.
+
+## 15. Why are anonymous serialization and honest time labels one public
+contract problem?
+
+**Question.** Can a dashboard remove an obvious identifier yet still disclose a
+stable identity or misrepresent when a measurement occurred?
+
+**Context.** A bounded source-contract review considered public station and
+cadence DTOs together with a receipt-derived “last received” field and its UI
+wording.
+
+**Symptoms.** Identity can survive in nested metadata, cadence fields, raw
+linkage, stable replacement values, or an error shape. A label such as “last
+measurement” can also turn a server receipt into an invented observation time.
+
+**Diagnostics.** Review every short-window, long-window, cadence, error, and
+rendering path. Use an exact public-field allowlist; try identity-bearing values
+in direct and nested locations; and trace every visible time label back to its
+source fact.
+
+**Failed options.** Removing only one visible identifier, replacing it with a
+stable anonymous-looking token, trusting a scalar field to stay scalar, or
+labelling receipt time as measurement time were rejected.
+
+**Established cause.** Privacy and time semantics are both serialization
+boundaries. A useful public projection needs neither a station identity nor a
+fictional observation timestamp.
+
+**Solution.** Emit only a generic display label and the minimum reviewed status
+or receipt fields. Validate nested structures fail-closed, label receipt time as
+receipt, and leave an unavailable observation time explicitly unknown.
+
+**Verification.** Negative source and rendering fixtures can check direct and
+nested disclosure paths. They do not prove that an endpoint was deployed or that
+an ordinary browser currently serves the reviewed DTO.
+
+**Current status.** This source reference has no dashboard endpoint or browser
+assets. The lesson is a public-contract design rule, not a report about a live
+dashboard.
+
+**History.** The associated remediation was accepted only at bounded local
+source/fixture scope.
+
+## 16. How should a WEATHER reader handle store drift and unreliable fixture
+cleanup?
+
+**Question.** Can a read-only weather projection assume that a private store
+will always have the schema and timing behavior expected by its tests?
+
+**Context.** Local WEATHER work found two independent maintenance risks: a
+reader depended on a private normalized-store shape without an explicit version
+handshake, and a fixture suite could mix wall-clock completion time with fixed
+test time or leave a temporary store open after a failure.
+
+**Symptoms.** A reader can query an old, future, incomplete, or differently
+shaped store. A test can pass or fail according to timing coincidence, and a
+temporary SQLite file can remain locked during cleanup. Neither symptom proves a
+provider or production failure.
+
+**Diagnostics.** Open the private store read-only; verify its supported version,
+required table, and required projection fields before querying; and expose only
+a generic public source error on incompatibility. In tests, inject the scheduler
+and completion clocks separately, block network access, and close stores before
+temporary-directory removal.
+
+**Failed options.** Silently adapting an unknown store, letting private schema
+or path details reach a public error, treating a local suite as provider health,
+or changing a runtime provider merely to make fixtures green were rejected.
+
+**Established cause.** Store compatibility and fixture determinism are distinct
+contracts. A reliable local regression needs explicit versioning, cleanup, and
+time ownership; it does not establish the health of a live collector.
+
+**Solution.** Fail closed on unsupported store shapes, preserve the reader as a
+read-only projection, and make test clocks and cleanup order deliberate.
+
+**Verification.** Writer-shaped temporary stores and fail-closed fixtures can
+exercise the boundary locally. Provider polling, deployed SQLite custody,
+Linux/service behavior, and ordinary-browser acceptance need their own evidence.
+
+**Current status.** The public reference implements no WEATHER provider,
+polling, store, or map runtime.
+
+**History.** The reported repairs concerned local source and fixtures only; they
+were not an external-service health result.
+
+## 17. What does a bounded check not establish about data, hosting, or
+recovery?
+
+**Question.** Can a source fixture, selected static-asset match, successful
+public read, or historical package check establish that a deployment, database,
+ingest path, or recovery plan is healthy?
+
+**Context.** Dated reviews produced several different evidence classes: local
+source and PHP fixtures, a limited served-public-projection observation, selected
+static-asset comparisons, a historical package with an unreproducible canonical
+asset manifest, and an unavailable current database read boundary.
+
+**Symptoms.** A technical success can be described as full deployment parity;
+one visible projection can be mistaken for natural authenticated ingest; or a
+working-tree line-ending difference can be confused with an artifact-integrity
+defect. A historical package can remain available even after it is no longer a
+reproducible deployment authority.
+
+**Diagnostics.** Write a claim-to-evidence matrix. Attribute source tests to
+their fixtures, selected asset equality to those exact assets, and a public read
+to the response observed at that time. Obtain separately authorized aggregate
+database, natural-ingest, hosting/edge, and isolated-restore evidence before
+making those claims. Compare canonical artifact bytes with their manifest rather
+than only a checkout representation.
+
+**Failed options.** Treating an HTTP success as database or ingest proof,
+treating selected assets as full deployment parity, repairing old manifest bytes
+merely to force a check green, or calling an inaccessible data boundary healthy
+were rejected.
+
+**Established cause.** Evidence is claim-specific. A limited observation can be
+valuable without proving the surrounding system, and an unreproducible
+historical package should be retained as history but retired as a future
+deployment authority.
+
+**Solution.** Keep evidence labels narrow, fail closed where an artifact or
+access boundary cannot support the intended claim, and use a separately reviewed
+successor for any new deployment or recovery exercise.
+
+**Verification.** Record the exact scope, date, inputs, and exclusions for each
+check. Do not turn a local fixture, browser harness, provider observation, or
+isolated restore into a broader acceptance class.
+
+**Current status.** This reference has no database, ingest endpoint, hosting
+configuration, asset package, or recovery artifact. It makes no current health
+claim about any of them.
+
+**History.** The retained cases teach how to preserve useful limited evidence
+without concealing the still-unverified boundaries around it.

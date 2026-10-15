@@ -13,9 +13,9 @@
 | [TESTING.md](TESTING.md) | Reproducible safe local checks |
 | [PUBLICATION_AUDIT.md](PUBLICATION_AUDIT.md) | Sanitization/audit procedure |
 | [LIMITATIONS.md](LIMITATIONS.md) | What this baseline cannot prove or do |
-| [FAQ.md](FAQ.md) | Structured practical FAQ and sanitized engineering lessons |
+| [FAQ.md](FAQ.md) | Structured practical FAQ, including contract, browser, WEATHER, and evidence-scope lessons |
 | [TROUBLESHOOTING.md](TROUBLESHOOTING.md) | Safe local diagnostics only |
-| [INCIDENT_LESSONS.md](INCIDENT_LESSONS.md) | Detailed sanitized historic incident histories |
+| [INCIDENT_LESSONS.md](INCIDENT_LESSONS.md) | Detailed sanitized historic incidents, including local-only contract and acceptance limits |
 | [REUSE_GUIDE.md](REUSE_GUIDE.md) | Checklist for applying the method safely elsewhere |
 | [ROADMAP.md](ROADMAP.md) | Deferred workstreams |
 | [FUTURE_BOUNDARIES.md](FUTURE_BOUNDARIES.md) | Future-only architecture boundaries |

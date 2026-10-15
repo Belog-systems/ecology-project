@@ -463,21 +463,22 @@ manual review, or secret rotation after disclosure.
 ## INC-10 — Backup creation was not restore acceptance
 
 **Period:** backup and recovery verification
-**Status:** `SUPERSEDED` for an earlier incomplete restore conclusion; overall DR
-remains `PARTIAL`
+**Status:** `SUPERSEDED` for an earlier `FAILED` database-restore conclusion;
+overall DR remains `PARTIAL`
 
 ### What was observed
 
-An earlier fresh backup had artifact-level checks but did not initially produce
-enough independent restore evidence to establish logical recovery. This was
-recorded as a limitation rather than explained away.
+An earlier fresh backup had artifact-level checks, but its isolated database
+restore attempts were recorded as `FAILED`: they did not establish a logical
+import of the expected data. This outcome was retained rather than explained
+away.
 
 ### Investigation
 
 Recovery work distinguished backup creation, artifact identity, provider import,
 isolated restore, schema/data comparison, off-host custody, and bare-environment
-recovery. The later verification used a new isolated target and bounded,
-read-only comparison evidence; production data was not used as a restore target.
+recovery. Later evidence used a separate isolated target and bounded comparison;
+production data was not used as a restore target.
 
 ### Failed options
 
@@ -488,16 +489,16 @@ read-only comparison evidence; production data was not used as a restore target.
 
 ### Established cause
 
-Backup and restore are different capabilities. The earlier incomplete conclusion
-was correctly superseded only after stronger isolated restore evidence was
-available.
+Backup and restore are different capabilities. The earlier `FAILED` result was
+superseded only for the later isolated database-import and comparison scope; it
+did not establish every recovery capability.
 
 ### Remedy and verification
 
 The reusable standard is an isolated restore with explicit comparison of schema,
 data relationships, integrity, and the scope of what was exercised. The result
-must say whether off-host transfer, independent-machine recovery, secret/key
-custody, and full reprovisioning are included or still excluded.
+must say whether off-host transfer, independent-machine recovery, protected
+secret/key recovery, and full reprovisioning are included or still excluded.
 
 ### Remaining limit
 
@@ -507,7 +508,240 @@ deployment needs its own protected backup and restore rehearsal.
 
 ---
 
-## INC-11 — Publishing engineering lessons required a separate privacy boundary
+## INC-11 — A browser-feasible module did not make a Node-oriented Core
+browser-ready
+
+**Period:** dated Foundation/browser feasibility review
+**Status:** `PARTIAL` / `BLOCKED` for full-Core browser use
+
+### What was observed
+
+A browser harness could load a copied browser-facing reference module through a
+synthetic data/root adapter. The fuller Core import also depended on Node-bound
+filesystem, path, URL, and configuration work and was rejected in the browser
+scope.
+
+### Investigation
+
+The review kept Node-side contract results, a copied-module browser spike, and a
+full-Core browser lifecycle as separate claims. It traced the import and
+provisioning boundary instead of treating a visible browser result as an
+architecture-wide pass.
+
+### Failed options
+
+- Call the synthetic reference-module result a full Core integration.
+- Treat a passing Node suite as browser execution evidence.
+- Assume a browser can safely discover, configure, authorize, or provision a
+  Core merely because one module loads.
+
+### Established cause
+
+The full Core was not browser-ready in its reviewed topology because its
+provisioning graph had Node-bound dependencies. The limited browser result proved
+only the copied module and its synthetic adapter.
+
+### Remedy and verification
+
+Any future design must explicitly separate Node-side provisioning from browser
+execution and prove the actual browser-safe lifecycle, descriptor/asset policy,
+and host boundary. That proof cannot be replaced by a fixture module.
+
+### Remaining limit
+
+The public reference contains no Foundation runtime or browser application. This
+case makes no current compatibility claim about an external system.
+
+---
+
+## INC-12 — A nullable-field guard failed when absence was treated as `null`
+
+**Period:** local public-contract self-check review
+**Status:** `RESOLVED` for the narrow fixture-only guard; broader runtime scope
+remains unproven
+
+### What was observed
+
+A local guard accepted a missing required observation-time key as though the key
+were explicitly present with a `null` value. It could therefore pass a malformed
+fixture without protecting the stated public contract.
+
+### Investigation
+
+The review distinguished field presence from nullability, then tested absent,
+explicit-null, type-invalid, and unexpected-structure cases. It also retained
+the broader rule that a declared schema and a runtime validator require separate
+evidence until both paths are exercised.
+
+### Failed options
+
+- Use a fallback lookup that makes a missing key indistinguishable from `null`.
+- Test only the expected fixture shape.
+- Infer endpoint, PHP, browser, or deployment behavior from a local guard.
+
+### Established cause
+
+`null` was an allowed value for a required key, not permission to omit that key.
+The defect was in the diagnostic predicate and was not evidence that an accepted
+PM projection had emitted a malformed time value.
+
+### Remedy and verification
+
+The narrowed guard now requires key presence and the permitted value/type, with
+a sanitized omission regression. Independent review and local acceptance closed
+that fixture-only defect.
+
+### Remaining limit
+
+The correction does not establish a live runtime, endpoint, provider, browser,
+or production state. It protects only the selected local diagnostic boundary.
+
+---
+
+## INC-13 — Public DTOs had to omit identity and label receipt time as receipt
+
+**Period:** local public-dashboard contract reconciliation
+**Status:** `PARTIAL` — accepted locally at source/fixture scope only
+
+### What was observed
+
+A public Dashboard contract required review of short-window, long-window, and
+cadence serialization paths. Identity-bearing fields or stable replacements
+could survive in direct or nested metadata, while a receipt-derived field could
+be presented as though it were a measurement time.
+
+### Investigation
+
+The remediation audited query construction, DTO assembly, error shapes, browser
+rendering, and downstream validation. Adversarial fixtures placed identity-like
+objects in expected scalar/cadence locations and checked that public rendering
+uses receipt terminology rather than a fabricated observation claim.
+
+### Failed options
+
+- Remove one visible identifier while leaving a nested or stable substitute.
+- Assume an expected scalar can never contain an object.
+- Relabel last receipt as the station's last measurement.
+- Present a local source correction as proof of deployed disclosure or browser
+  behavior.
+
+### Established cause
+
+Identity minimization and time semantics are public serialization obligations.
+The reviewed source contract retained a generic presentation and a receipt field
+without manufacturing a station observation time.
+
+### Remedy and verification
+
+Exact public field/type validation and negative source/rendering fixtures reject
+direct and nested identity paths. The local UI wording labels the value as a
+receipt, and unavailable observation time remains unknown.
+
+### Remaining limit
+
+The result does not prove a current PHP endpoint, deployed cache, ordinary
+browser, production source, or historical identity exposure.
+
+---
+
+## INC-14 — WEATHER compatibility and fixture cleanup needed explicit contracts
+
+**Period:** local WEATHER regression and reader/store hardening
+**Status:** `PARTIAL` — local source and fixture boundary only
+
+### What was observed
+
+A read-only WEATHER projection depended on a private normalized-store shape
+without an explicit compatibility handshake. Separately, a fixture suite mixed
+fixed test time with a separately sampled completion time and could leave a
+temporary SQLite store open after an assertion failure.
+
+### Investigation
+
+The reader was exercised against writer-shaped temporary stores and incompatible
+versions/shapes. The test suite separated scheduler and completion clocks, used a
+fail-closed network guard, and made store closure precede temporary-directory
+cleanup.
+
+### Failed options
+
+- Query an unknown, legacy, future, or incomplete private store optimistically.
+- Expose private schema, path, provider, or failure detail through a public
+  error.
+- Treat a local fixture result as provider, timer, hosted SQLite, or browser
+  health.
+
+### Established cause
+
+Store compatibility and fixture determinism are different boundaries. A
+read-only projection must fail closed on an unsupported writer shape, and tests
+must own their clocks and cleanup order.
+
+### Remedy and verification
+
+The local reader checks a supported version and required projection before
+querying, maps incompatibility to a generic public error, and retains no write,
+repair, polling, or registration behavior. Local regressions cover compatible
+and incompatible stores plus deterministic cleanup.
+
+### Remaining limit
+
+No live provider, deployed store, Linux/service manager, external map tile, or
+ordinary-browser result follows from this local evidence.
+
+---
+
+## INC-15 — A bounded observation and a historical package were not deployment
+acceptance
+
+**Period:** evidence-boundary and historical asset-integrity reconciliation
+**Status:** `SUPERSEDED` for a historical package as deployment authority;
+`PARTIAL` for surrounding data and hosting evidence
+
+### What was observed
+
+Different reviews produced local fixtures, selected static-asset equality, a
+bounded served-public-projection observation, and a historical map package whose
+canonical manifest could not reproduce one declared asset digest. A current
+database read boundary and direct natural-ingest proof remained unavailable.
+
+### Investigation
+
+The work compared canonical artifact bytes rather than only Windows checkout
+line endings, separated selected asset parity from full deployment parity, and
+kept public-response observations distinct from database, ingest, hosting, and
+recovery evidence.
+
+### Failed options
+
+- Treat an HTTP response or selected static assets as proof of the full runtime.
+- Infer natural authenticated ingest, normalization, database integrity, or
+  freshness policy from a public projection.
+- Rewrite historical bytes or manifests solely to force an integrity check green.
+- Describe an unavailable database or hosting boundary as healthy.
+
+### Established cause
+
+Evidence proved only its named scope. The historical package was retained as
+evidence but retired as a reproducible deployment authority; a limited public
+observation did not close the surrounding data or operational boundaries.
+
+### Remedy and verification
+
+Use a claim-to-evidence matrix, preserve immutable historical artifacts, and
+require separately authorized evidence for aggregate database state, natural
+ingest, hosting/edge behavior, and isolated recovery. A future deployment must
+use its own reviewed artifact and acceptance sequence.
+
+### Remaining limit
+
+This public reference has no deployment package, database, ingest endpoint,
+hosting configuration, asset manifest, or recovery artifact. It makes no current
+health claim about them.
+
+---
+
+## INC-16 — Publishing engineering lessons required a separate privacy boundary
 
 **Period:** public documentation and source sanitization
 **Status:** `RESOLVED` for the immutable baseline; successor documentation is

@@ -21,6 +21,10 @@
   packaging, UI/browser acceptance, diagnostic secret safety, recovery, and
   publication hygiene.
 - A reusable engineering checklist for new monitoring projects.
+- Five additional FAQ entries and incident histories covering Core/browser scope,
+  exact nullable-field validation, anonymous DTO/time-label boundaries, WEATHER
+  compatibility and fixture cleanup, and evidence limits for assets, data,
+  hosting, and recovery.
 
 ### Changed
 
@@ -29,12 +33,18 @@
 - Linked the restored engineering knowledge through the Portal Air README and
   documentation index without adding operational topology, data, secrets,
   location state, or deployment instructions.
+- Clarified that a historical failed database-restore result remains part of the
+  record even where later isolated import evidence superseded it only in its
+  stated narrow scope.
 
 ### Fixed
 
 - Restored access to accumulated public-safe engineering context that had been
   lost from the sanitized baseline's short FAQ and incident summary, while
   marking superseded or unproven conclusions explicitly.
+- Distinguished source fixtures, selected asset comparisons, public technical
+  observations, ordinary-browser acceptance, and recovery exercises so that one
+  evidence class is not represented as another.
 
 ### Not changed
 
