@@ -2,7 +2,7 @@
 
 | Document | Purpose |
 |---|---|
-| [CURRENT_STATE.md](CURRENT_STATE.md) | Freeze and baseline status |
+| [CURRENT_STATE.md](CURRENT_STATE.md) | Published baseline and local successor status |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Sanitized PM source-reader boundary |
 | [DATA_AND_TIME_SEMANTICS.md](DATA_AND_TIME_SEMANTICS.md) | PM receipt-time and future WEATHER boundary |
 | [PRIVACY_AND_LOCATION.md](PRIVACY_AND_LOCATION.md) | Coordinate and data exclusion boundary |
@@ -13,13 +13,14 @@
 | [TESTING.md](TESTING.md) | Reproducible safe local checks |
 | [PUBLICATION_AUDIT.md](PUBLICATION_AUDIT.md) | Sanitization/audit procedure |
 | [LIMITATIONS.md](LIMITATIONS.md) | What this baseline cannot prove or do |
-| [FAQ.md](FAQ.md) | Concise scope answers |
+| [FAQ.md](FAQ.md) | Structured practical FAQ and sanitized engineering lessons |
 | [TROUBLESHOOTING.md](TROUBLESHOOTING.md) | Safe local diagnostics only |
-| [INCIDENT_LESSONS.md](INCIDENT_LESSONS.md) | Generalized engineering lessons |
+| [INCIDENT_LESSONS.md](INCIDENT_LESSONS.md) | Detailed sanitized historic incident histories |
+| [REUSE_GUIDE.md](REUSE_GUIDE.md) | Checklist for applying the method safely elsewhere |
 | [ROADMAP.md](ROADMAP.md) | Deferred workstreams |
 | [FUTURE_BOUNDARIES.md](FUTURE_BOUNDARIES.md) | Future-only architecture boundaries |
 | [WORKTREE_RECOVERY.md](WORKTREE_RECOVERY.md) | Safe local repository recovery guidance |
-| [review/CANDIDATE_MANIFEST.md](review/CANDIDATE_MANIFEST.md) | Generated candidate contents and hashes |
+| [review/CANDIDATE_MANIFEST.md](review/CANDIDATE_MANIFEST.md) | Historical immutable-baseline candidate contents and hashes |
 
 Nothing in this documentation authorizes production access, a deployment,
 configuration change, provider polling, or station/firmware action.

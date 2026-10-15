@@ -15,6 +15,12 @@ LICENSE_STATUS=OWNER_DECISION_REQUIRED
 PRODUCTION_MUTATION=NOT_RUN
 ```
 
+> **Snapshot scope.** This manifest is retained as the historical file/hash
+> record for the immutable sanitized baseline at its published tag. Its table
+> validates that tagged snapshot only. It is not a hash manifest for a later
+> documentation successor, even where a successor updates a path listed below.
+> Check out the immutable tag before using these hashes for byte comparison.
+
 ## Inclusion rule
 
 Every file listed below is in the reviewed final candidate. The source files

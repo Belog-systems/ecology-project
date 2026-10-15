@@ -1,18 +1,28 @@
 # Current state
 
-This is a **frozen sanitized local candidate** prepared under an internal
-baseline-freeze program. It carries only the new clean Git history created for
-this curated tree; it is not an export of an internal repository. It has not
-been remotely published, deployed, or accepted as a production runtime.
+The immutable sanitized Portal Air V1 baseline is published in this repository
+under its existing immutable tag. This successor branch is a local,
+documentation-only recovery candidate; it is not included in that tag and has
+not been published by this work.
 
-The candidate preserves a narrow V1 PM-source-reader reference: TLS hostname
+The Portal Air content was curated from a clean public-safe source boundary and
+is not an export of an internal repository. Neither the baseline nor this
+successor is a deployment, a runtime archive, or evidence of current production
+health.
+
+The reference preserves a narrow V1 PM-source-reader boundary: TLS hostname
 validation over an explicitly configured address, normalized PM projection,
 receipt-time semantics and explicit missing-data behavior. It intentionally
 excludes every production identity, location, source address, operational path,
 raw record, deployment artifact, browser application, map runtime and external
 WEATHER integration.
 
-Private publication, if later performed, needs an authenticated private remote,
-an independent review, a clean new Git root, a new immutable tag, and a fresh
-clone verification. Public visibility and a project license remain owner
-decisions.
+Any future successor publication needs independent review, a fresh final-tree
+privacy/security check, link and local-test checks, and a new explicit release
+decision. The existing baseline tag must remain unchanged. A project license
+remains an owner decision.
+
+For a future derivative, the reference does not establish device measurement
+time, durable replay/queue behavior, complete device server-authentication
+behavior, or full disaster-recovery readiness; those remain separate reviewed
+workstreams.

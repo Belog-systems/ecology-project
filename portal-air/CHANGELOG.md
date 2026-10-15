@@ -4,6 +4,45 @@
 > umbrella repository during integration of the immutable sanitized r5 snapshot.
 > It is not part of that immutable r5 source tree.
 
+## Unreleased — documentation recovery successor
+
+> **Classification:** `SUCCESSOR_DOCUMENTATION_ADDENDUM`. This entry documents
+> a local successor candidate after the immutable published baseline. It does
+> not modify the existing tag, source-reference behavior, deployment state, or
+> production systems.
+
+### Added
+
+- A thematic, evidence-bound public FAQ that separates historic cases from the
+  public source-reference boundary.
+- Detailed sanitized incident histories covering device protocol discovery,
+  embedded TLS/MFLN compatibility, path and identity handling, raw-first ingest,
+  time/gap/completeness semantics, external WEATHER provenance, Linux/service
+  packaging, UI/browser acceptance, diagnostic secret safety, recovery, and
+  publication hygiene.
+- A reusable engineering checklist for new monitoring projects.
+
+### Changed
+
+- Corrected stale wording that described the already published immutable
+  baseline as an unpublished or private-only candidate.
+- Linked the restored engineering knowledge through the Portal Air README and
+  documentation index without adding operational topology, data, secrets,
+  location state, or deployment instructions.
+
+### Fixed
+
+- Restored access to accumulated public-safe engineering context that had been
+  lost from the sanitized baseline's short FAQ and incident summary, while
+  marking superseded or unproven conclusions explicitly.
+
+### Not changed
+
+- The immutable published baseline tag and its source-derived content.
+- `air-device/**`, production services, databases, station configuration, DNS,
+  TLS, provider registration/polling, credentials, raw data, or deployment
+  configuration.
+
 ## Unreleased — sanitized r5 integration
 
 ### Added

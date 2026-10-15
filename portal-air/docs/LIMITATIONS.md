@@ -9,7 +9,11 @@
 - It does not integrate an external WEATHER source or provider.
 - It does not prove backup/restore, rollback/recovery, TLS, DNS, infrastructure
   or public-browser acceptance.
-- It does not make the project public or select a project license.
+- It does not select a project license or grant reuse rights.
+- The immutable sanitized baseline is published, but that publication does not
+  make this source a production package or prove a current external runtime.
+- This untagged documentation successor has not been published by its local
+  preparation work.
 
 The test suite is deliberately local and synthetic. Production claims must rely
 on separate current evidence, not this repository alone.
