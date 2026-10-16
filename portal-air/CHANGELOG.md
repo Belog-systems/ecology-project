@@ -4,12 +4,38 @@
 > umbrella repository during integration of the immutable sanitized r5 snapshot.
 > It is not part of that immutable r5 source tree.
 
-## Unreleased — documentation recovery successor
+## 2026-10-17 — bilingual public documentation
+
+> **Classification:** `SUCCESSOR_DOCUMENTATION_ADDENDUM`. This docs-only entry
+> adds bilingual public navigation and does not modify the immutable baseline
+> tag, source-reference behavior, deployment state, or production systems.
+
+### Added
+
+- A Russian-primary Portal Air project page and a content-equivalent English
+  edition, with explicit relative language links.
+- A full Russian edition of the 17-entry practical FAQ alongside the preserved
+  English edition.
+
+### Changed
+
+- Added mutual language navigation to both FAQ editions and links to both
+  editions from the documentation index.
+- Corrected stale public wording that described already published successor
+  documentation as local-only or unpublished.
+
+### Not changed
+
+- The immutable published baseline tag, executable source, `air-device/**`,
+  production services, databases, station configuration, DNS, TLS, provider
+  registration/polling, credentials, raw data, or deployment configuration.
+
+## Published documentation recovery successor (post-baseline)
 
 > **Classification:** `SUCCESSOR_DOCUMENTATION_ADDENDUM`. This entry documents
-> a local successor candidate after the immutable published baseline. It does
-> not modify the existing tag, source-reference behavior, deployment state, or
-> production systems.
+> published successor documentation after the immutable published baseline. It
+> does not modify the existing tag, source-reference behavior, deployment state,
+> or production systems.
 
 ### Added
 

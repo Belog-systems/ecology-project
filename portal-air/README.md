@@ -1,45 +1,184 @@
-# Portal Air V1 sanitized reference
+# Portal Air
 
-**Status:** published, immutable sanitized baseline plus an untagged
-documentation-recovery successor candidate. The baseline is a public source
-reference, not a production deployment package. Publication does not select a
-software license or grant reuse rights beyond those explicitly stated in
-[`LICENSE_STATUS.md`](LICENSE_STATUS.md).
+[Русский](README.md) | [English](README.en.md)
 
-This is a curated reference tree, not an export of the internal Portal Air
-repository. It preserves selected V1 PM-source-reading semantics and the
-documentation needed to review those semantics without carrying production data,
-operational evidence, internal Git history, credentials, exact coordinates, or
-deployment/rollback custody.
+> **Статус публичного репозитория.** Portal Air опубликован здесь как
+> санитарно очищенная эталонная исходная база и документация. Это не готовый
+> установочный комплект, не экспорт действующей инфраструктуры и не
+> доказательство текущего состояния какого-либо внешнего сервиса. Неизменяемый
+> базовый tag сохранён отдельно; более поздняя документация публикуется как
+> последующие commits и не изменяет этот tag.
 
-The immutable baseline tag remains unchanged. Later documentation may explain
-sanitized historic engineering lessons, but it must not be read as a change to
-the tagged baseline, evidence of a current runtime, or a substitute for a
-separately reviewed deployment.
+## 1. Что такое Portal Air
 
-## Scope
+Portal Air — проект экологического мониторинга, выросший из задачи надёжно
+принимать и объяснять данные реальной станции. Его важны не только графики
+концентраций, но и происхождение каждого значения, различие между временем
+измерения и временем получения сервером, честное отображение пропусков и
+проверяемые границы доверия к внешним данным.
 
-- `portal_air_v1/` contains a sanitized, read-only PM-source reference.
-- `docs/` records scope, privacy, security, semantics, limitations, testing and
-  future boundaries.
-- `tools/publication_audit.py` is a dependency-free disclosure scanner and is
-  included with tests.
+Публичный репозиторий сохраняет безопасно опубликованные исходные материалы и
+инженерные уроки. Он намеренно не воспроизводит частную рабочую среду,
+операционные данные или конфигурацию развертывания.
 
-The source is intentionally **not** an installer or a production-ready package.
-Any deployment requires a separately authorized review of secrets, source
-contracts, ingress, location privacy, backup/restore, monitoring and ordinary
-browser acceptance. This reference implements no external WEATHER provider,
-map runtime, frontend, packet ingest, database writer, or station control.
+## 2. Для каких задач создана система
 
-## Safe local checks
+Методика Portal Air предназначена для задач, в которых необходимо:
 
-```powershell
-python -m unittest discover -s portal_air_v1/tests -v
-python -m unittest tools/tests/test_publication_audit.py -v
-python tools/publication_audit.py . --fail-on P1
+- установить фактический протокол физического устройства до проектирования
+  API;
+- сохранить безопасную raw-запись факта получения до нормализации данных;
+- нормализовать известные измерения, не теряя частичные и ошибочные доставки;
+- различать время наблюдения источника, время получения и другие временные
+  факты;
+- показывать отсутствие данных как пропуск, а не как выдуманное нулевое
+  значение или установленную причину отказа;
+- считать полноту событий по явно заданному cadence и отдельно оценивать
+  полноту каналов;
+- хранить provenance внешних WEATHER-источников, не выдавая модель, прогноз или
+  удалённое наблюдение за локальное измерение;
+- проверять transport, пользовательский браузер, backup и restore как разные
+  классы доказательств; и
+- публиковать только материалы, прошедшие privacy и security review.
+
+## 3. Какие фактические компоненты существуют
+
+Из безопасно опубликованной инженерной истории известно, что проект включал
+реальную станцию измерения PM, ограниченный TLS-вход для совместимости
+встроенного клиента, частный контур приёма и нормализации, а также read-only
+представления данных. Отдельно исследовались WEATHER-источники и границы их
+provenance.
+
+В самом публичном репозитории фактически находятся только:
+
+- санитарно очищенный, read-only PM-source reader в `portal_air_v1/`;
+- synthetic fixtures и локальные тесты этого reader;
+- dependency-free `tools/publication_audit.py` и его тесты;
+- техническая документация, FAQ, истории инцидентов и guide по безопасному
+  переиспользованию.
+
+Здесь нет live endpoint, ingest listener, базы данных, dashboard, map runtime,
+provider polling, конфигурации gateway или управления станцией.
+
+## 4. Концептуальная архитектура действующего проекта
+
+Ниже показана только концептуальная граница, а не production topology,
+hostname, адрес или конфигурация:
+
+```text
+Физическая станция
+    -> контролируемая TLS/HTTP граница
+        -> безопасное raw receipt evidence
+            -> нормализация известных измерений
+                -> частные Reading и аналитические/read-only представления
+
+Внешние WEATHER-источники
+    -> изолированное исследование / shadow qualification
+        -> provenance и health facts
+            -> отдельное решение о любом последующем использовании
 ```
 
-See [docs/INDEX.md](docs/INDEX.md) before using this material. For the restored
-sanitized engineering history, read [docs/FAQ.md](docs/FAQ.md),
-[docs/INCIDENT_LESSONS.md](docs/INCIDENT_LESSONS.md), and
-[docs/REUSE_GUIDE.md](docs/REUSE_GUIDE.md).
+Контур WEATHER не должен неявно изменять PM-данные. Переход от исследования
+источника к production использованию требует отдельного review.
+
+## 5. Что реализовано в приватной рабочей системе
+
+Опубликованные истории описывают следующие реализованные в частной рабочей
+системе подходы: raw-first приём, явные parse outcomes, раздельные временные
+поля, обработку повторной доставки, event-cadence completeness, отображение
+длинных пропусков, ограниченную transport-адаптацию для встроенного клиента и
+разделение технической HTTP-проверки от обычной browser acceptance.
+
+Они также описывают изолированное исследование внешних WEATHER-источников и
+проверку recovery в ограниченных границах. Эти сведения являются историческими
+и evidence-bounded: публичный репозиторий не раскрывает private runtime и не
+подтверждает его текущую доступность, конфигурацию или полноту recovery.
+
+## 6. Что доступно в публичном GitHub
+
+Публичный GitHub предоставляет узкий, reviewed reference tree для изучения
+PM-source reading semantics, временных и privacy boundaries, безопасных
+локальных проверок и практических инженерных решений. Полностью доступны
+русская и английская главные страницы, а также две полные версии FAQ.
+
+Это полезный материал для review и проектирования похожей системы, но не
+самостоятельный сервис, который можно установить без дополнительной работы.
+
+## 7. Какие функции исключены из опубликованной эталонной версии
+
+Из публичной версии намеренно исключены:
+
+- credentials, sessions, private configuration, hostnames, адреса и точные либо
+  приближённые location data;
+- raw packets, observations, production database, backup, evidence и handoff
+  artifacts;
+- packet ingest, database writer, API, dashboard, map, browser assets и
+  station-control path;
+- конфигурация TLS gateway, deployment, rollback и production monitoring;
+- provider registration, keys, live polling и внешние WEATHER observations; и
+- инструкции, достаточные для воспроизведения частной инфраструктуры.
+
+Эти исключения защищают людей, данные и действующую среду; они не являются
+недостающими файлами, которые следует угадывать или заменять.
+
+## 8. Где посмотреть техническую документацию
+
+Начните с [индекса документации](docs/INDEX.md). В частности, доступны
+[архитектурная граница](docs/ARCHITECTURE.md),
+[семантика данных и времени](docs/DATA_AND_TIME_SEMANTICS.md),
+[ограничения](docs/LIMITATIONS.md), [безопасные локальные проверки](docs/TESTING.md),
+[граница deployment](docs/DEPLOYMENT.md),
+[privacy и location boundary](docs/PRIVACY_AND_LOCATION.md) и
+[guide по переиспользованию](docs/REUSE_GUIDE.md).
+
+Остальная техническая документация сохранена на английском, чтобы исходные
+технические формулировки, имена файлов и контракты оставались однозначными.
+
+## 9. Где прочитать FAQ
+
+- [FAQ на русском](docs/FAQ.ru.md)
+- [FAQ in English](docs/FAQ.md)
+
+Обе версии содержат 17 полных вопросов и ответов о протоколе, raw-first ingest,
+TLS, времени, пропусках, WEATHER provenance, browser acceptance, security,
+recovery и границах доказательств.
+
+## 10. Где найти инженерные инциденты и рекомендации
+
+[Истории инцидентов и сохранённые уроки](docs/INCIDENT_LESSONS.md) содержат 16
+санитарно очищенных инженерных историй. Для практического применения метода в
+другом проекте используйте [REUSE_GUIDE.md](docs/REUSE_GUIDE.md). Эти документы
+объясняют, какие выводы были установлены, какие варианты не сработали и какие
+границы остались непроверенными.
+
+## 11. Что требуется для самостоятельного развертывания
+
+Самостоятельное развертывание требует отдельного, специально reviewed проекта:
+реального capture протокола конкретного устройства, безопасной модели secrets,
+ingress и TLS, схемы хранения, privacy policy, monitoring, backup/restore
+rehearsal, rollback plan, условий внешних providers и ordinary-browser
+acceptance. Нужно также отдельно выбрать лицензию и подтвердить права на
+сторонние данные и компоненты.
+
+Опубликованный reference tree не следует рассматривать как инструкцию по
+установке или как достаточный набор файлов для self-hosted deployment.
+
+## 12. Текущий статус и ограничения
+
+Неизменяемый sanitised baseline опубликован под существующим tag. Последующая
+документация, включая эту двуязычную навигацию, публикуется отдельно и не
+изменяет исходный baseline. Публичная исходная база не доказывает текущую
+работоспособность частной системы, public-browser acceptance, provider
+availability, disaster-recovery readiness или готовность installable package.
+
+Каждое утверждение в документации ограничено своим evidence scope. Успешный
+локальный тест, технический HTTP probe, historical observation и полная
+production acceptance — это разные результаты.
+
+## 13. Сведения о лицензировании
+
+Для исходного кода и документации Portal Air пока не выбрана лицензия.
+Публичная доступность репозитория сама по себе не даёт права на reuse,
+redistribution или sublicensing. См. [LICENSE_STATUS.md](LICENSE_STATUS.md).
+Любой будущий выбор лицензии или включение сторонних компонентов требует
+отдельного решения и соблюдения соответствующих условий.

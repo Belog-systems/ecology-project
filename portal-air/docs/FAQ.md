@@ -1,5 +1,7 @@
 # Practical FAQ and engineering lessons
 
+[Русский](FAQ.ru.md) | [English](FAQ.md)
+
 > **Scope.** This document is a documentation-recovery successor to the
 > immutable sanitized Portal Air baseline. It retains sanitized lessons from
 > historical engineering cases. It is not an operating runbook, a deployment
@@ -558,8 +560,8 @@ allowlists, and inspect the final staged diff rather than a working directory
 alone.
 
 **Current status.** The original immutable published tag remains unchanged.
-This successor documentation is an additive recovery candidate until separately
-reviewed and published; no license grant is implied by repository access.
+This published successor documentation is an additive recovery document; no
+license grant is implied by repository access.
 
 **Recommendations.** Use [REUSE_GUIDE.md](REUSE_GUIDE.md) as the practical
 checklist. Keep a new project's sources, evidence, secrets, licensing, and

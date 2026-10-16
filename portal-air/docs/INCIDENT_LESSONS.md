@@ -745,7 +745,7 @@ health claim about them.
 
 **Period:** public documentation and source sanitization
 **Status:** `RESOLVED` for the immutable baseline; successor documentation is
-pending its own review/publication.
+published separately and remains outside that immutable tag.
 
 ### What was observed
 
